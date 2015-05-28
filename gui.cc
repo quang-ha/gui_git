@@ -228,7 +228,7 @@ void MyGLCanvas::OnMouse(wxMouseEvent& event)
 //      names *names_mod, devices *devices_mod, monitor *monitor_mod, long style):
 //   wxFrame(parent, wxID_ANY, title, pos, size, styl
 
-MyPanel::MyPanel(wxPanel *parent, names *names_mod, monitor *monitor_mod, devices *devices_mod, network *network_mod)
+MyPanel::MyPanel(MyFrame *parent, names *names_mod, monitor *monitor_mod, devices *devices_mod, network *network_mod)
        : wxPanel(parent, wxID_ANY)
 {
   nmz = names_mod;
@@ -238,7 +238,8 @@ MyPanel::MyPanel(wxPanel *parent, names *names_mod, monitor *monitor_mod, device
 
   wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
 
-  //MyFrame *real_frame = (MyFrame *) GetParent();
+  real_frame = parent;
+  //MyFrame *real_frame = dynamic_cast<MyFrame*>(GetParent()->GetParent());
   m_lb = real_frame->listbox;
 
   wxArrayString str;
@@ -293,8 +294,8 @@ void MyPanel::OnAdd(wxCommandEvent& event)
 {
   bool OK;
   wxString str = event.GetString();
-  cout << "Is there parent?: " << (real_frame==NULL) << endl;
-  //cout << "Is there canvas?: " << (real_frame->canvas == NULL) << endl;
+  cout << "Is there parent?: " << (real_frame == NULL) << endl;
+  cout << "Is there canvas?: " << (real_frame->canvas == NULL) << endl;
   if (str.Len() > 0)
   {
     name device, out;
@@ -302,7 +303,7 @@ void MyPanel::OnAdd(wxCommandEvent& event)
     m_lb->Append(str); 
     mmz->makemonitor(device, out, OK);
   }
-  //real_frame->canvas->Render("Add new monitor");
+  real_frame->canvas->Render("Add new monitor");
 }
 
 void MyPanel::OnDelete(wxCommandEvent& event) 
@@ -316,7 +317,7 @@ void MyPanel::OnDelete(wxCommandEvent& event)
       mmz->remmonitor(device, output, OK);
       m_lb->Delete(sel);
   }
-  //real_frame->canvas->Render("Remove monitor");
+  real_frame->canvas->Render("Remove monitor");
 }
 
 // ***** MY PANEL - ENDED ****** //
@@ -482,7 +483,7 @@ MyFrame::MyFrame(wxWindow *parent, const wxString& title, const wxPoint& pos, co
   wxBoxSizer *hbox_right = new wxBoxSizer(wxHORIZONTAL);
   listbox = new wxListBox(panel, ID_LISTBOX, wxDefaultPosition, wxDefaultSize); 
   hbox->Add(listbox, 1, wxEXPAND | wxALL, 5);
-  btnPanel = new MyPanel(panel, names_mod, monitor_mod, devices_mod, network_mod);
+  btnPanel = new MyPanel(this, names_mod, monitor_mod, devices_mod, network_mod);
   hbox_right->Add(btnPanel, 1, wxEXPAND | wxALL, 5);
   hbox->Add(hbox_right, 1, wxEXPAND | wxALL, 5);
   panel->SetSizer(hbox);

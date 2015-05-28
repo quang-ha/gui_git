@@ -88,7 +88,7 @@ class MyFrame;
 class MyPanel: public wxPanel
 {
 public: 
-  MyPanel(wxPanel *parent, names *names_mod = NULL, monitor *monitor_mod = NULL, devices *devices_mod = NULL, network *network_mod = NULL);
+  MyPanel(MyFrame *parent, names *names_mod = NULL, monitor *monitor_mod = NULL, devices *devices_mod = NULL, network *network_mod = NULL);
 
   void OnAdd(wxCommandEvent& event);
   void OnDelete(wxCommandEvent& event);
