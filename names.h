@@ -21,17 +21,17 @@ vector<namestring> namevec;
 string tablename;
 public:
 	namestring& operator[](std::size_t idx)  { return namevec.at(idx); };
-	name add (namestring str);
-	name add (namestring str,int,int,string);
-	name add(namestring str, int line, int pos, string file_name, bool);
-	name retrieve (namestring str);
-	name retrieve (namestring str,int,int,string);
-	name lookup (namestring str,int,int,string);
-	name lookup(namestring str, int l, int p, string file_name, bool allowslash);
-	name lookup(namestring str,string);
-	name lookup(namestring str);
-	name lookup(namestring str, bool);
-	bool tryretrieve (namestring str);
+	name add (const namestring &str);
+	name add (const namestring &str,int,int,const string &);
+	name add(const namestring &str, int line, int pos, const string & file_name, bool);
+	name retrieve (const namestring &str);
+	name retrieve (const namestring &str,int,int,const string &);
+	name lookup (const namestring &str,int,int,const string &);
+	name lookup(const namestring &str, int l, int p, const string &file_name, bool allowslash);
+	name lookup(const namestring &str,const string &);
+	name lookup(const namestring &str);
+	name lookup(const namestring &str, bool);
+	bool tryretrieve (const namestring &str);
 	void writename (name id);
     /* Prints out the given name on the console                            */
 
@@ -39,8 +39,8 @@ public:
     /* Returns length ie number of characters in given name                */
 	int size() { return namevec.size(); }
 
-	names (string);
-	names(vector<string>, string);
+	names (const string&);
+	names(const vector<string>&, const string&);
     /* names initialises the name table.  This procedure is called at      */
     /* system initialisation before any of the above procedures/functions  */
     /* are used.                                                           */
