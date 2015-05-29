@@ -1,0 +1,11 @@
+INCLUDE invalid.nylb;
+INCLUDE test1.nya;
+INCLUDE quang;
+CREATE ALICE(1,2,3,4), BOB(a,b,c,d);
+CREATE ALICE 1(1,2,3,4), BOB(e,f,g,a);
+CREATE ALICE l(1,2,3,4), BOB(e,f,g,a);
+CREATE ALICE DEFINE(1,2,3,4), BOB(e,f,g,a);
+CREATE ALICE l(1,2,3,4), CHARLIE(e,f,g,a);
+CREATE ALICE l(1,2,3,4), DAVE(e,f,g,a);
+CREATE ALICE w(1,2,3), DAVE(e,f,g,a);
+INCLUDE test3.nylb;
